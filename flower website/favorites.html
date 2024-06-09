@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorites</title>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    
+    <style>
+        :root {
+            --pink: #e84393;
+        }
+        * {
+            box-sizing: border-box;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            outline: none;
+            border: none;
+            text-decoration: none;
+            text-transform: capitalize;
+            transition: .2s linear;
+            margin: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 6rem;
+            overflow-x: hidden;
+        }
+        span {
+            color: #e84393;
+        }
+        .navbar {
+            text-align: center;
+            font-style: italic;
+            background-color: rgb(205, 237, 205);
+        }
+        .navbar a {
+            font-size: 1.5rem;
+            padding: 0 1.5rem;
+            color: #666;
+        }
+        .navbar a:hover {
+            color: var(--pink);
+        }
+        #favorites-items {
+            display: flex;
+            flex-direction: row;
+            padding: 2rem 9%;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: space-around;
+            grid-template-columns: repeat(4, 1fr);
+            background-color: #ebdcec;
+        }
+        .favorite-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            width: 25rem;
+            margin: 2.5rem auto;
+            border-style: inset;
+            border-radius: 10px;
+            gap: 2rem;
+            
+        }
+        .favorite-item img {
+            width: 70%;
+            height: 50%;
+            padding: 5px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-radius: 10%;
+            box-shadow: inset;
+            object-fit: cover;
+        }
+        .favorite-item img:hover {
+            transform: scale(1.1);
+        }
+        .favorite-item button:hover {
+            transform: scale(1.1);
+        }
+        .favorite-item p {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            font-style: oblique;
+            font-family: cursive;
+            font-size: 2vw;
+            width: 60%;
+            height: 20%;
+            text-align: center;
+            color: #e84393;
+        }
+        .delete-btn {
+            border: none;
+            background-color: transparent;
+            width: 1.563rem;
+            height: 1.563rem;
+            border-radius: 50%;
+        }
+        .delete-btn img {
+            cursor: pointer;
+            width: 1.563rem;
+            height: 1.563rem;
+            margin-right: 50px;
+            padding: 0;
+        }
+        .addToCartBtn {
+            background-color: #f91798;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        h1 {
+            text-align: center;
+            background-color: pink;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-style: italic;
+        }
+        .elements-div {
+            display: flex;
+            flex-direction: row;
+            align-items: baseline;
+            width: 80%;
+            height: 15%;
+            justify-content: space-around;
+            margin-bottom: 30px;
+        }
+        @media (max-width: 991px) {
+            #favorites-items {
+                flex-wrap: wrap;
+            }
+        }
+        @media (max-width: 844px) {
+            #favorites-items {
+                flex-wrap: wrap;
+            }
+            .navbar a{
+                font-size: 1rem;
+            }
+        }
+        @media (max-width: 557px) {
+            #favorites-items {
+                flex-wrap: wrap;
+            }
+            .navbar a{
+                font-size: 0.8rem;
+            }
+            .favorite-item p{
+                margin-bottom: 50px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="favorites">
+    <h1>Your Favorites<span>.</span></h1>
+    <nav class="navbar">
+        <a href="index.html#home">Home</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#products">Products</a>
+        <a href="index.html#review">Review</a>
+        <a href="index.html#contact">Contact</a>
+    </nav>
+    <div id="favorites-items"></div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const favoritesList = document.getElementById('favorites-items');
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        const showFavorites = () => {
+            favoritesList.innerHTML = '';
+            if (favorites.length === 0) {
+                favoritesList.innerHTML = '<p>Your favorites list is empty.</p>';
+            } else {
+                favorites.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.classList.add('favorite-item');
+
+                    const itemImage = document.createElement('img');
+                    itemImage.src = item.image;
+                    itemImage.alt = item.name;
+
+                    const itemName = document.createElement('p');
+                    itemName.textContent = `${item.name} - ${item.price} $`;
+
+                    const deleteButton = document.createElement('button');
+                    deleteButton.innerHTML = '<img src="./images/delete red.png" alt="deleteicon">';
+                    deleteButton.classList.add('delete-btn');
+                    deleteButton.addEventListener('click', () => {
+                        const itemIndex = favorites.indexOf(item);
+                        favorites.splice(itemIndex, 1);
+                        localStorage.setItem('favorites', JSON.stringify(favorites));
+                        showFavorites();
+                    });
+
+                    const addToCartButton = document.createElement('button');
+                    addToCartButton.textContent = 'Add to Cart';
+                    addToCartButton.classList.add('addToCartBtn');
+                    addToCartButton.addEventListener('click', () => {
+                        addToCart(item);
+                        addToCartButton.textContent = 'Added'; 
+                        addToCartButton.disabled = true;
+                    });
+
+                    itemDiv.appendChild(itemImage);
+                    itemDiv.appendChild(itemName);
+                    itemDiv.appendChild(addToCartButton);
+                    itemDiv.appendChild(deleteButton);
+
+                    favoritesList.appendChild(itemDiv);
+                });
+            }
+        };
+
+        const addToCart = (item) => {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const existingItem = cartItems.find(cartItem => cartItem.name === item.name);
+
+            if (existingItem) {
+                existingItem.count++;
+            } else {
+                item.count = 1;
+                cartItems.push(item);
+            }
+
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        };
+
+        showFavorites();
+    });
+</script>
+
+</body>
+</html>

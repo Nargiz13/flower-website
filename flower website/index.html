@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Website </title>
+     <!--Font awesome cdn link-->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     
+     <link rel="stylesheet" href="style.css"> 
+     <style>
+
+        #loginContainer {
+            display: none; 
+        }
+        
+    </style>
+
+
+</head>
+<body>
+
+    <div id="loginContainer">
+    	<div class="main">  	
+            <input class="signupInput" type="checkbox" id="chk" aria-hidden="true">
+    
+                <div class="signup">
+                    <form>
+                        <label for="chk" aria-hidden="true">Sign up</label>
+                        <input class="signupInput" type="text" name="txt" placeholder="User name" required="">
+                        <input class="signupInput" type="email" name="email" placeholder="Email" required="">
+                        <input class="signupInput" type="number" name="broj" placeholder="Number" required="">
+                        <input class="signupInput" type="password" name="pswd" placeholder="Password" required="">
+                        <button class="signupBtn">Sign up</button>
+                    </form>
+                </div>
+    
+                <div class="login">
+                    <form>
+                        <label for="chk" aria-hidden="true">Login</label>
+                        <input class="signupInput" type="email" name="email" placeholder="Email" required="">
+                        <input class="signupInput" type="password" name="pswd" placeholder="Password" required="">
+                        <button class="signupBtn">Login</button>
+                    </form>
+                </div>
+        </div>
+    </div>
+
+    <div id="cartList"></div>
+    
+    <div id="flowersList"></div>
+
+    <!-- The Modal -->
+
+    <div id="descriptionModal" class="description-modal">
+        <div class="description-modal-content">
+            <span class="close">&times;</span>
+            <p id="descriptionText"></p>
+        </div>
+    </div>
+    
+    <div id="description-card" class="description-card">
+        <span class="close">&times;</span>
+        <div id="description-content">
+           
+        </div>
+    </div>
+
+
+    <script src="script.js" ></script>
+
+    <!--Header section starts-->
+    <header>
+        <input type="checkbox" name="" id="toggler">
+        <label for="toggler" class="fas fa-bars"></label>
+        <a href="#" class="logo">BlossomWave<span>.</span></a>
+        <label id="second-label" for="icon-toggler" class="fas fa-bars"></label>
+        <nav class="navbar">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#products">Products</a>
+            <a href="#review">Review</a>
+            <a href="#contact">Contact</a>
+         
+        </nav>
+        <div class="icons">
+            <a href="#" class="fas fa-magnifying-glass" id="searchIcon" ></a>
+            <a href="favorites.html"  class="fas fa-heart" id="heartIcon"></a>
+            <a href="#" class="fas fa-user" id="userIcon"></a>
+            <div id="basket"><a href="cart.html" class="fas fa-shopping-cart"></a><span id="counter">0</span></div>
+            
+        </div>
+      
+    </header>
+     <!--Header section ends-->
+    <div class="searchFlowers" style="display: none;">
+        <div class="colorFilter">
+            <select id="colorSelect" onchange="filterByColor()">
+                <option value="all"> All </option>
+                <option value="red">Red</option>
+                <option value="yellow">Yellow</option>
+                <option value="white">White</option>
+                <option value="orange">Orange</option>
+                <option value="pink">Pink</option>
+                <option value="purple">Purple</option>
+                <option value="blue">Blue</option>
+            </select>
+        </div>
+        <div class="searchbutton">
+            <input type="text" id="searchInput" placeholder="   Search flowers...">
+            <button id="first" onclick="searchFlowers()">Search</button>
+        </div>
+      
+    
+
+      <!-- Add color filter dropdown -->
+        
+    </div>
+    <div class="priceFilter" id="priceFilter" style="display: none;">
+        <label for="priceSelect">Filter by price:</label>
+        <select id="priceSelect" onchange="filterFlowers()">
+            <option value="all">All</option>
+            <option value="0-10">0-10</option>
+            <option value="10-20">10-20</option>
+            <option value="20-30">20-30</option>
+        </select>
+    </div>
+    </div>
+    
+     <!--Home section starts-->
+     <section class="home" id="home">
+        <div class="content">
+            <h3>Fresh Flowers</h3>
+            <span>Natural & beautiful flowers</span>
+            <p>Discover the beauty of nature with our exquisite collection of fresh flowers. Whether you’re celebrating a special moment or simply bringing a smile to someone’s face, our vibrant and fragrant bouquets are perfect for any occasion.</p>
+            <a href="#products" class="btn"> Shop Now</a>
+            
+        </div>
+     </section>
+
+
+    <!--Home section ends-->
+
+
+  <!--About section starts-->
+<section class="about" id="about">
+    <h1 class="heading"><span>about</span> us</h1>
+    <div class="row">
+        <div class="video-container">
+            <video src="./images/about-vid.mp4" loop autoplay muted></video>
+            <h3>best flowers sellers</h3>
+        </div>
+        <div class="content">
+            <h3>why choose us?</h3>
+            <p>Exceptional Quality: Our flowers are handpicked from the finest gardens to ensure long-lasting freshness and beauty.</p>
+            <p>Wide Variety: From classic roses to exotic orchids, find the perfect floral arrangement that speaks to your heart.</p>
+            <a href="#" class="btn">Learn More</a>
+
+        </div>
+    </div>
+</section>
+
+  <!--About section ends-->
+
+<!--icons section starts-->
+
+<section class="icons-container">
+    <div class="icons">
+        <img src="./images/icon-1.png" alt="">
+        <div class="info">
+            <h3>Free delivery</h3>
+            <span>on all orders</span>
+        </div>
+    </div>
+
+    <div class="icons">
+        <img src="./images/icon-2.png" alt="">
+        <div class="info">
+            <h3>10 days returns</h3>
+            <span>Moneyback guarantee</span>
+        </div>
+    </div>
+
+    <div class="icons">
+        <img src="./images/icon-3.png" alt="">
+        <div class="info">
+            <h3>offer & gits</h3>
+            <span>on all orders</span>
+        </div>
+    </div>
+
+    <div class="icons">
+        <img src="./images/icon-4.png" alt="">
+        <div class="info">
+            <h3>Secure payments</h3>
+            <span>protected by paypal</span>
+        </div>
+    </div>
+</section>
+
+<!--icons section bitir-->
+
+<!--Products section baslayir-->
+
+<section class="products" id="products">
+    <h1 class="heading">latest <span>products</span></h1>
+    <div class="box-container">
+        <div class="box">
+            <span class="discount">-10%</span>
+            <div class="image">
+                <img src="./images/img-1.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart"  data-name="Pink tulip bouquet" data-image="./images/img-1.jpg" data-price="17.99"></a>
+                    <a href="#" class="cart-btn" data-name="Pink tulip bouquet" data-image="./images/img-1.jpg"  data-price="17.99">add to cart</a>
+                    <a href="#" class="fas fa-info-circle" data-description="The Pink tulip bouquet is a delightful arrangement of fresh, vibrant pink tulips, carefully curated to bring joy and beauty to any occasion. Each stem is hand-selected for its exquisite color and shape, creating a harmonious bouquet that exudes elegance and charm. Whether it's a birthday celebration, anniversary surprise, or a simple gesture of affection, this bouquet is sure to convey your heartfelt emotions."></a>                </div>
+            </div>
+            <div class="content">
+                <h3>Pink tulip bouquet</h3>
+                <div class="price">$17.99 <span>$15.99</span></div>
+            </div>
+        </div>
+
+        <div class="box">
+            <span class="discount">-15%</span>
+            <div class="image">
+                <img src="./images/img-2.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart" data-name="Special design colorful bouquet" data-image="./images/img-2.jpg" data-price="13.99"></a>
+                    <a href="#" class="cart-btn" data-name="Special design colorful bouquet" data-image="./images/img-2.jpg">add to cart</a>
+                    <a href="#" class="fas fa-info-circle" data-description="The Special Design Colorful Bouquet is a masterpiece of floral artistry, featuring a vibrant array of blooms meticulously arranged to create a stunning visual display. Bursting with a kaleidoscope of colors, including vibrant reds, sunny yellows, lush greens, and tranquil blues, this bouquet is a celebration of nature's beauty. Each flower is carefully chosen for its unique shape, size, and hue, resulting in a harmonious composition that captivates the eye and warms the heart."></a>
+                </div>
+            </div>
+            <div class="content">
+                <h3>Special design colorful bouquet</h3>
+                <div class="price">$13.99 <span>$15.99</span></div>
+            </div>
+        </div>
+        
+        <div class="box">
+            <span class="discount">-5%</span>
+            <div class="image">
+                <img src="./images/img-3.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart" data-name="Valentine composition with red tulips" data-image="./images/img-3.jpg" data-price="14.99"></a>
+                    <a href="#" class="cart-btn" data-name="Valentine composition with red tulips" data-image="./images/img-3.jpg">add to cart</a>
+                    <a href="#" class="fas fa-info-circle" data-description="The Valentine Composition With Red Tulips is a romantic masterpiece, meticulously crafted to symbolize love and passion. Featuring a stunning arrangement of deep red tulips, interspersed with delicate foliage and accented with elegant embellishments, this composition exudes timeless elegance and charm. Each tulip represents a declaration of affection, making it the perfect gift for expressing your love on Valentine's Day or any special occasion. The rich, velvety petals of the tulips evoke feelings of warmth and desire, while the lush greenery adds a touch of freshness and vitality."></a>
+                </div>
+            </div>
+            <div class="content">
+                <h3>Valentine composition with red tulips</h3>
+                <div class="price">$14.99 <span>$15.99</span></div>
+            </div>
+        </div>
+
+        <div class="box">
+            <span class="discount">-20%</span>
+            <div class="image">
+                <img src="./images/img-4.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart" data-name="Seasonal select red-yellow bouquet" data-image="./images/img-4.jpg" data-price="12.99"></a>
+                    <a href="#" class="cart-btn" data-name="Seasonal select red-yellow bouquet" data-image="./images/img-4.jpg" >add to cart</a>
+                    <a href="#" class="fas fa-info-circle" data-description="The Seasonal Select Red-Yellow Bouquet is a vibrant expression of the changing seasons, featuring a captivating blend of rich reds and sunny yellows. Handcrafted with care, this bouquet showcases the beauty of nature's transition, with fiery hues that evoke warmth and energy. Each flower is carefully selected for its freshness and vibrancy, creating a striking juxtaposition of colors and textures. Whether it's a cheerful gift to brighten someone's day or a stunning centerpiece to adorn your home, this bouquet brings a touch of seasonal splendor to any occasion. With its bold colors and captivating beauty, it serves as a reminder to embrace the beauty of every moment and cherish the joy of the present season."></a>
+                </div>
+            </div>
+            <div class="content">
+                <h3>Seasonal select red-yellow bouquet</h3>
+                <div class="price">$12.99 <span>$15.99</span></div>
+            </div>
+        </div>
+
+        <div class="box">
+            <span class="discount">-17%</span>
+            <div class="image">
+                <img src="./images/img-5.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart"  data-name="White triumphator pot" data-image="./images/img-5.jpg" data-price="14.99"></a>
+                    <a href="#" class="cart-btn" data-name="White triumphator pot" data-image="./images/img-5.jpg">add to cart</a>
+                    <a href="#" class="fas fa-info-circle" data-description="The White Triumphator Pot is an elegant and refined floral arrangement, exuding timeless beauty and sophistication. Featuring pristine white blooms elegantly displayed in a stylish pot, this arrangement radiates purity and grace. Each flower is meticulously chosen for its pristine petals and delicate fragrance, creating a captivating symphony of elegance and charm. Whether it's adorning a special event or gracing your home with its understated luxury, this arrangement brings a sense of tranquility and serenity to any space. Perfect for commemorating significant milestones or expressing heartfelt sentiments, the White Triumphator Pot is a symbol of purity, perfection, and enduring love."></a>
+                </div>
+            </div>
+            <div class="content">
+                <h3>White triumphator pot</h3>
+                <div class="price">$14.99 <span>$15.99</span></div>
+            </div>
+        </div>
+
+        <div class="box">
+            <span class="discount">-3%</span>
+            <div class="image">
+                <img src="./images/img-6.png" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart" data-name="Special select red bouquet" data-image="./images/img-6.png" data-price="18.99"></a>
+                    <a href="#" class="cart-btn" data-name="Special select red bouquet" data-image="./images/img-6.png">add to cart</a>
+                    <a href="#" class="fas fa-info-circle" data-description="The Special Select Red Bouquet is a stunning arrangement that captures the essence of passion and romance. With its rich, deep red blooms, this bouquet symbolizes love, desire, and strength. Each flower is carefully selected for its bold color and exquisite beauty, creating a captivating display that evokes intense emotions. Whether it's for a romantic gesture, a special anniversary, or to convey heartfelt admiration, this bouquet is sure to leave a lasting impression. With its lush greenery and elegant presentation, it adds a touch of sophistication and drama to any occasion. Gift the Special Select Red Bouquet to someone special and watch as it ignites their heart with warmth and affection."></a>
+                </div>
+            </div>
+            <div class="content">
+                <h3>Special select red bouquet</h3>
+                <div class="price">$18.99 <span>$15.99</span></div>
+            </div>
+        </div>
+
+        <div class="box">
+            <span class="discount">-18%</span>
+            <div class="image">
+                <img src="./images/img-7.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart" data-name="Gesneriana vase" data-image="./images/img-7.jpg" data-price="15.99"></a>
+                    <a href="#" class="cart-btn" data-name="Gesneriana vase" data-image="./images/img-7.jpg">add to cart</a>
+                    <a href="#" class="fas fa-info-circle" data-description="The Gesneriana Vase is a breathtaking floral arrangement that exudes elegance and refinement. Featuring the vibrant Gesneriana flowers delicately arranged in a graceful vase, this arrangement is a true masterpiece of floral artistry. The Gesneriana flowers, with their bold colors and unique shapes, add a touch of exotic beauty to any space. Whether displayed as a centerpiece at a special event or adorning a mantel or table in your home, the Gesneriana Vase commands attention and admiration. With its striking presence and timeless appeal, it serves as a stunning focal point that elevates the ambiance of any room. Gift the Gesneriana Vase to someone special to convey your appreciation, admiration, or congratulations in a truly unforgettable way."></a>
+                </div>
+            </div>
+            <div class="content">
+                <h3>gesneriana vase</h3>
+                <div class="price">$15.99 <span>$15.99</span></div>
+            </div>
+        </div>
+
+        <div class="box">
+            <span class="discount">-10%</span>
+            <div class="image">
+                <img src="./images/img-8.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart" data-name="red gesneriana pot" data-image="./images/img-8.jpg" data-price="17.99"></a>
+                    <a href="#" class="cart-btn" data-name="red gesneriana pot" data-image="./images/img-8.jpg">add to cart</a>
+                    <a href="#" class="fas fa-info-circle" data-description="The Red Gesneriana Pot is a striking floral arrangement that commands attention with its vibrant hues and graceful presentation. Featuring the captivating red Gesneriana flowers nestled in a chic pot, this arrangement exudes sophistication and charm. Each Gesneriana flower, with its velvety petals and intense color, adds a touch of drama and elegance to any setting. Whether adorning a tabletop, brightening up a corner of a room, or serving as a memorable gift, the Red Gesneriana Pot is sure to leave a lasting impression. With its bold presence and natural beauty, it brings warmth and vitality to any space, making it the perfect choice for adding a touch of glamour to your home or celebrating special occasions with style."></a>
+                </div>
+            </div>
+            <div class="content">
+                <h3>red gesneriana pot</h3>
+                <div class="price">$17.99 <span>$15.99</span></div>
+            </div>
+        </div>
+
+        <div class="box">
+            <span class="discount">-5%</span>
+            <div class="image">
+                <img src="./images/img-9.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart" data-name="pink special bouquet" data-image="./images/img-9.jpg" data-price="11.99"></a>
+                    <a href="#" class="cart-btn" data-name="pink special bouquet" data-image="./images/img-9.jpg">add to cart</a>
+                    <a href="#" class="fas fa-info-circle" data-description="The Special Pink Bouquet is a delightful floral arrangement that radiates grace and charm with its soft, pastel hues. Featuring a beautiful selection of pink blooms expertly arranged to create a harmonious composition, this bouquet exudes elegance and femininity. Each flower, with its delicate petals and sweet fragrance, adds a touch of romance and whimsy to the arrangement. Whether it's to celebrate a special occasion, express admiration, or simply brighten someone's day, the Special Pink Bouquet is sure to convey your heartfelt sentiments with its beauty and grace. Perfect for gifting to loved ones or adorning your home, this bouquet brings joy and warmth wherever it goes, making it a cherished addition to any space."></a>
+                </div>
+            </div>
+            <div class="content">
+                <h3>special pink bouquet</h3>
+                <div class="price">$11.99 <span>$15.99</span></div>
+            </div>
+        </div>
+
+        <div class="box">
+            <span class="discount">-11%</span>
+            <div class="image">
+                <img src="./images/img-10.png" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart" data-name="Peonies" data-image="./images/img-10.png" data-price="11.99"></a>
+                    <a href="#" class="cart-btn" data-name="Peonies" data-image="./images/img-10.png">add to cart</a>
+                    <a href="#" class="fas fa-info-circle" data-description="The bouquet is a breathtaking floral arrangement designed to add a touch of romance and elegance to your special day. Featuring lush peonies in soft, pastel hues, delicately accented with foliage and ribbon, this bouquet exudes timeless beauty and sophistication. Peonies, known for their luxurious blooms and delicate fragrance, symbolize love, prosperity, and happiness, making them the perfect choice for weddings. Each carefully curated bloom is arranged to perfection, creating a stunning focal point that complements any bridal ensemble. Whether you're walking down the aisle or posing for photographs, the Wedding Peonies Bouquet adds a touch of grace and charm to your wedding day memories."></a>
+                </div>
+            </div>
+            <div class="content">
+                <h3> wedding Peonies bouquet</h3>
+                <div class="price">$11.99 <span>$15.99</span></div>
+            </div>
+        </div>
+
+        <div class="box">
+            <span class="discount">-9%</span>
+            <div class="image">
+                <img src="./images/img-11.png" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart" data-name="Light-colored gesnerianas" data-image="./images/img-11.png" data-price="13.99"></a>
+                    <a href="#" class="cart-btn" data-name="Light-colored gesnerianas" data-image="./images/img-11.png">add to cart</a>
+                    <a href="#" class="fas fa-info-circle" data-description="The Light-Colored Gesnerianas arrangement offers a serene and graceful ambiance with its delicate pastel hues. Featuring Gesneriana flowers in soft shades of pink, peach, and cream, this arrangement exudes tranquility and elegance. Each bloom, with its gentle petals and subtle hues, adds a touch of understated beauty to any space."></a>
+                </div>
+            </div>
+            <div class="content">
+                <h3>Light-colored gesnerianas</h3>
+                <div class="price">$13.99 <span>$15.99</span></div>
+            </div>
+        </div>
+
+        <div class="box">
+            <span class="discount">-5%</span>
+            <div class="image">
+                <img src="./images/img-12.png" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart" data-name="Texas bluebell" data-image="./images/img-12.png" data-price="18.99"></a>
+                    <a href="#" class="cart-btn" data-name="Texas bluebell" data-image="./images/img-12.png">add to cart</a>
+                    <a href="#" class="fas fa-info-circle" data-description="The Texas Bluebell Vase captures the wild beauty of the Lone Star State with its vibrant hues and rustic charm. Featuring the iconic Texas bluebells delicately arranged in a rustic vase, this arrangement exudes a sense of natural elegance and rustic charm. Each bluebell, with its vivid blue petals and delicate bell-shaped blooms, evokes the rugged beauty of the Texas countryside. "></a>
+                </div>
+            </div>
+            <div class="content">
+                <h3>Texas bluebell vase</h3>
+                <div class="price">$18.99 <span>$15.99</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Products section ends-->
+
+
+<!--review section starts-->
+<section class="review" id="review">
+    <h1 class="heading">customer's <span>review</span></h1>
+    <div class="box-container">
+        <div class="box">
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <p>"The Honeysuckle vine has quickly become a favorite in my garden. The fragrance is intoxicating and brings so many butterflies around. It's a joy to watch it grow and flourish. My only regret is not ordering more. Will definitely be buying again."</p>
+            <div class="user">
+                <img src="./images/pic-1.png" alt="">
+                <div class="user-info">
+                    <h3>Daniel Anderson</h3>
+                    <span>Happy Customers</span>
+                </div>
+            </div>
+            <span class="fas fa-quote-right"></span>
+        </div>
+
+        <div class="box">
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <p>"I am absolutely in love with the Hellebores I purchased. They are stunning and have brought so much life to my winter garden. Their resilience in colder weather is impressive, and the variety of colors adds a unique charm. Highly recommended for anyone looking to enhance their garden during the winter months."!</p>
+            <div class="user">
+                <img src="./images/pic-2.png" alt="">
+                <div class="user-info">
+                    <h3>Sarah Davis</h3>
+                    <span>Happy Customers</span>
+                </div>
+            </div>
+            <span class="fas fa-quote-right"></span>
+        </div>
+
+        <div class="box">
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <p>"The Peonies are absolutely gorgeous. They arrived in bud form and have since bloomed into the most beautiful pink flowers. They were well-packaged and in excellent condition. I couldn't be happier and will definitely be purchasing more."</p>
+            <div class="user">
+                <img src="./images/pic-3.png" alt="">
+                <div class="user-info">
+                    <h3>Khalid Al Amri</h3>
+                    <span>Happy Customers</span>
+                </div>
+            </div>
+            <span class="fas fa-quote-right"></span>
+        </div>
+
+        <div class="box">
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <p>"I chose lavender for my wedding, and it was the best decision ever! The lavender was fresh, fragrant, and absolutely beautiful. It added a touch of elegance and a lovely scent that filled the air during our ceremony. All of our guests complimented the unique and charming choice. The lavender also made stunning bouquets and centerpieces. It truly made our day magical and memorable. Thank you for providing such high-quality flowers for our special day!"</p>
+            <div class="user">
+                <img src="./images/pic-4.jpg" alt="">
+                <div class="user-info">
+                    <h3>Olivia Jackson</h3>
+                    <span>Happy Customers</span>
+                </div>
+            </div>
+            <span class="fas fa-quote-right"></span>
+        </div>
+    </div>
+</section>
+
+<!--review section ends-->
+
+
+<!--contact section starts-->
+<section class="contact" id="contact">
+    <h1 class="heading"><span>contact</span> us</h1>
+    <div class="row">
+        <form action="">
+            <input type="text" class="box" placeholder="Name">
+            <input type="email" class="box" placeholder="Email">
+            <input type="number" class="box" placeholder="Number">
+            <textarea name="" class="box" placeholder="Message" id="" cols="30" rows="10"></textarea>
+            <input type="submit" value="send message" class="btn">
+        </form>
+        <div class="image">
+            <img src="./images/contact-img.svg" alt="">
+        </div>
+    </div>
+</section>
+<!--contact section ends-->
+
+<!--footer section starts-->
+<section class="footer">
+    <div class="box-container">
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="#">home</a>
+            <a href="#">about</a>
+            <a href="#">products</a>
+            <a href="#">review</a>
+            <a href="#">contact</a>
+        </div>
+        <div class="box">
+            <h3>Extra links</h3>
+            <a href="#">my account</a>
+            <a href="cart.html">my order</a>
+            <a href="favorites.html">my favorites</a>
+        </div>
+        <div class="box">
+            <h3>Locations</h3>
+            <a href="#">Azerbaijan</a>
+            <a href="#">Turkiye</a>
+            <a href="#">USA</a>
+            <a href="#">Japan</a>
+            <a href="#">Ukraine</a>
+        </div>
+
+        <div class="box">
+            <h3>contact info</h3>
+            <a href="#">+123-456-7890</a>
+            <a href="#">fushionflower@gmail.com</a>    
+          <img src="./images/payment.png" alt="">
+       
+        </div>
+    </div>
+    <div class="credit">
+        &copy; Created by <span> Nargiz Javadova</span> All Rights Reserved.
+    </div>
+</section>
+
+<!--footer section ends-->
+
+
+</body>
+</html>
